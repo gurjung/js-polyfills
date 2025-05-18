@@ -14,7 +14,11 @@ Array.prototype.myMap = function (callback, thisArg) {
   const tempArr = [];
 
   for (let i = 0; i < this.length; i++) {
-    if (i in this) {
+    // if (i in this) {
+    //   tempArr[i] = callback.call(thisArg, this[i], i, this);
+    // }
+
+    if(Object.prototype.hasOwnProperty.call(this, i)) {
       tempArr[i] = callback.call(thisArg, this[i], i, this);
     }
   }
