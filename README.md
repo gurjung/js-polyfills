@@ -28,3 +28,17 @@ const arr = [1, 2, 3];
 
 const result = arr.myMap((num) => num * 2);
 console.log(result); // [2, 4, 6]
+
+const arr = [1, , 3];
+console.log(arr.myMap(x => x * 2)); // [2, <empty>, 6]
+
+
+[1, 2].myMap(123); // ❌ Throws: Callback is not a function
+
+
+## 🧪 How to Run Tests
+
+```bash
+node tests/array/map.polyfill.test.js
+
+
