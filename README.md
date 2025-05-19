@@ -10,6 +10,7 @@ A collection of polyfills for core JavaScript methods, written for deep learning
 - [x] Array.prototype.filter (`myFilter`)
 - [x] Array.prototype.forEach (`myForEach`)
 - [x] Array.prototype.forEach (`mySome`)
+- [x] Array.prototype.forEach (`myEvery`)
 
 ---
 
@@ -112,7 +113,6 @@ console.log(result); // [10, 20]
 
 ---
 
-
 ## 📘 Array.prototype.mySome
 
 ### Description
@@ -138,6 +138,39 @@ console.log(hasUndefined); // false
 
 [1, 2].mySome(123); // ❌ Throws: Callback is not a function
 ```
+
+---
+
+## 📘 Array.prototype.myEvery
+
+### Description
+
+Custom implementation of `Array.prototype.every()` which:
+
+- Returns true if the callback returns a truthy value for every element
+- Stops execution and returns false as soon as one element fails
+- Supports optional thisArg to bind this inside the callback
+- Skips holes (does not call callback on missing indices)
+- Throws if callback is not a function
+
+### Example Usage
+
+```js
+const arr = [2, 4, 6, 8];
+
+const result = arr.myEvery((num) => num % 2 === 0);
+console.log(result); // true
+
+const result2 = arr.myEvery((num) => num < 5);
+console.log(result2); // false
+
+const context = { min: 3 };
+const passed = [4, 5].myEvery(function (val) {
+  return val > this.min;
+}, context);
+console.log(passed); // true
+```
+
 ---
 
 ## 🧪 How to Run Tests
@@ -147,5 +180,6 @@ node tests/array/map.polyfill.test.js
 node tests/array/filter.polyfill.test.js
 node tests/array/forEach.polyfill.test.js
 node tests/array/some.polyfill.test.js
+node tests/array/every.polyfill.test.js
 
 ```
