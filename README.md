@@ -9,6 +9,7 @@ A collection of polyfills for core JavaScript methods, written for deep learning
 - [x] Array.prototype.map (`myMap`)
 - [x] Array.prototype.filter (`myFilter`)
 - [x] Array.prototype.forEach (`myForEach`)
+- [x] Array.prototype.forEach (`mySome`)
 
 ---
 
@@ -111,12 +112,40 @@ console.log(result); // [10, 20]
 
 ---
 
+
+## 📘 Array.prototype.mySome
+
+### Description
+
+Custom implementation of `Array.prototype.some()` which:
+
+- Tests whether at least one element passes the test implemented by the provided function
+- Supports optional thisArg to bind this inside the callback
+- Skips holes (does not call callback on missing indices)
+- Returns a boolean
+- Throws if callback is not a function
+
+### Example Usage
+
+```js
+const arr = [1, 2, 3];
+const hasEven = arr.mySome((x) => x % 2 === 0);
+console.log(hasEven); // true
+
+const sparseArr = [1, , 3];
+const hasUndefined = sparseArr.mySome((x) => x === undefined);
+console.log(hasUndefined); // false
+
+[1, 2].mySome(123); // ❌ Throws: Callback is not a function
+```
+---
+
 ## 🧪 How to Run Tests
 
 ```bash
 node tests/array/map.polyfill.test.js
 node tests/array/filter.polyfill.test.js
 node tests/array/forEach.polyfill.test.js
-
+node tests/array/some.polyfill.test.js
 
 ```
