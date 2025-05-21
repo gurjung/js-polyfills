@@ -173,6 +173,54 @@ console.log(passed); // true
 
 ---
 
+
+---
+
+## 📘 Object.assign
+
+### Description
+
+Custom implementation of `Object.assign()` which:
+
+- Copies own enumerable string and symbol properties from one or more source objects to a target object
+- Supports multiple source objects and merges them in order (properties in later sources overwrite earlier ones)
+- Skips null and undefined sources without throwing errors
+- Throws a TypeError if the target object is null or undefined
+- Does not copy inherited properties or non-enumerable properties
+
+### Example Usage
+
+```js
+const target = { a: 1 };
+const source1 = { b: 2 };
+const source2 = { c: 3, a: 4 };
+
+const result = Object.assign(target, source1, source2);
+console.log(result); // { a: 4, b: 2, c: 3 }
+
+// Symbol properties
+const sym = Symbol('foo');
+const sourceWithSymbol = { [sym]: 42 };
+const target2 = {};
+Object.assign(target2, sourceWithSymbol);
+console.log(target2[sym]); // 42
+
+// Null or undefined sources are skipped
+const target3 = { x: 1 };
+Object.assign(target3, null, undefined, { y: 2 });
+console.log(target3); // { x: 1, y: 2 }
+
+// Throws if target is null or undefined
+try {
+  Object.assign(null, { a: 1 });
+} catch (e) {
+  console.log(e instanceof TypeError); // true
+}
+
+```
+
+---
+
 ## 🧪 How to Run Tests
 
 ```bash
@@ -181,5 +229,6 @@ node tests/array/filter.polyfill.test.js
 node tests/array/forEach.polyfill.test.js
 node tests/array/some.polyfill.test.js
 node tests/array/every.polyfill.test.js
+node tests/object/assign.polyfill.test.js
 
 ```
