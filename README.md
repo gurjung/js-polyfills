@@ -11,6 +11,7 @@ A collection of polyfills for core JavaScript methods, written for deep learning
 - [x] Array.prototype.forEach (`myForEach`)
 - [x] Array.prototype.forEach (`mySome`)
 - [x] Array.prototype.forEach (`myEvery`)
+- [x] Object.assign
 
 ---
 
