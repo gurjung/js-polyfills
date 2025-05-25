@@ -12,6 +12,9 @@ A collection of polyfills for core JavaScript methods, written for deep learning
 - [x] Array.prototype.forEach (`mySome`)
 - [x] Array.prototype.forEach (`myEvery`)
 - [x] Object.assign
+- [x] Object.keys
+- [x] Object.values
+- [x] Object.entries
 
 ---
 
@@ -174,7 +177,6 @@ console.log(passed); // true
 
 ---
 
-
 ---
 
 ## 📘 Object.assign
@@ -200,7 +202,7 @@ const result = Object.assign(target, source1, source2);
 console.log(result); // { a: 4, b: 2, c: 3 }
 
 // Symbol properties
-const sym = Symbol('foo');
+const sym = Symbol("foo");
 const sourceWithSymbol = { [sym]: 42 };
 const target2 = {};
 Object.assign(target2, sourceWithSymbol);
@@ -217,7 +219,54 @@ try {
 } catch (e) {
   console.log(e instanceof TypeError); // true
 }
+```
 
+---
+
+---
+
+## 📘 Object.myKeys, Object.myValues, Object.myEntries
+
+### Description
+
+Custom implementations of `Object.keys()`, `Object.values()`, and `Object.entries()` which:
+
+- Work only on own enumerable string-keyed properties
+- Skip inherited and non-enumerable properties
+- Ignore symbol keys (same as native behavior)
+- Throw a TypeError if the input is null or undefined
+- Support primitive coercion (like Object(123) becomes a wrapper object)
+
+### Example Usage
+
+```js
+const obj = Object.create({ inherited: "skip this" });
+Object.defineProperty(obj, "hidden", {
+  value: "not visible",
+  enumerable: false,
+});
+obj.a = 1;
+obj.b = 2;
+
+console.log(Object.myKeys(obj)); // ['a', 'b']
+console.log(Object.myValues(obj)); // [1, 2]
+console.log(Object.myEntries(obj)); // [['a', 1], ['b', 2]]
+
+// Symbol keys are ignored
+const sym = Symbol("s");
+obj[sym] = 42;
+console.log(Object.myKeys(obj)); // still ['a', 'b']
+
+// Works with primitives
+console.log(Object.myKeys("hi")); // ['0', '1']
+console.log(Object.myValues("hi")); // ['h', 'i']
+
+// Throws if input is null or undefined
+try {
+  Object.myEntries(null);
+} catch (e) {
+  console.log(e instanceof TypeError); // true
+}
 ```
 
 ---
@@ -231,5 +280,8 @@ node tests/array/forEach.polyfill.test.js
 node tests/array/some.polyfill.test.js
 node tests/array/every.polyfill.test.js
 node tests/object/assign.polyfill.test.js
+node tests/object/keys.polyfill.test.js
+node tests/object/values.polyfill.test.js
+node tests/object/entries.polyfill.test.js
 
 ```

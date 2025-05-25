@@ -1,5 +1,4 @@
-// मान लो तुम्हारा polyfill ऐसा नाम रखो:
-require("../../polyfills/object/assign.polyfill"); // path adjust कर लेना
+require("../../polyfills/object/assign.polyfill");
 
 // Test 1: Basic property copying
 const target1 = { a: 1 };
