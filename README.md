@@ -179,6 +179,53 @@ console.log(passed); // true
 
 ---
 
+## 📘 Array.prototype.myReduce
+
+### Description
+
+Custom implementation of `Array.prototype.reduce()` which:
+
+- Executes a reducer function on each element of the array
+- Accumulates a single return value based on the callback logic
+- Accepts an optional initialValue to use as the first accumulator value
+- If initialValue is not provided, the first array element is used
+- Throws if: The array is empty and no initialValue is provided or The callback is not a function
+- Operates sequentially from left to right
+- Does not process missing elements (holes in sparse arrays)
+
+### Example Usage
+
+```js
+const arr = [1, 2, 3, 4];
+
+// Sum without initial value
+const sum = arr.myReduce((acc, curr) => acc + curr);
+console.log(sum); // 10
+
+// Sum with initial value
+const sumWithInit = arr.myReduce((acc, curr) => acc + curr, 5);
+console.log(sumWithInit); // 15
+
+// Product with initial value
+const product = arr.myReduce((acc, curr) => acc * curr, 1);
+console.log(product); // 24
+
+// Reduce on empty array with initial value
+const emptyResult = [].myReduce((acc, curr) => acc + curr, 100);
+console.log(emptyResult); // 100
+
+// Reduce on empty array without initial value (throws)
+try {
+  [].myReduce((acc, curr) => acc + curr);
+} catch (e) {
+  console.log(e.message); // Reduce of empty array with no initial value
+}
+```
+
+---
+
+---
+
 ## 📘 Object.assign
 
 ### Description
@@ -274,11 +321,13 @@ try {
 ## 🧪 How to Run Tests
 
 ```bash
+
 node tests/array/map.polyfill.test.js
 node tests/array/filter.polyfill.test.js
 node tests/array/forEach.polyfill.test.js
 node tests/array/some.polyfill.test.js
 node tests/array/every.polyfill.test.js
+node tests/array/reduce.polyfill.test.js
 node tests/object/assign.polyfill.test.js
 node tests/object/keys.polyfill.test.js
 node tests/object/values.polyfill.test.js
