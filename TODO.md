@@ -2,3 +2,22 @@
 
 - [ ] Array.prototype.find
 - [ ] Array.prototype.findIndex
+- [ ] Array.prototype.flat
+- [ ] setTimeout
+- [ ] setInterval
+- [ ] String.split
+- [ ] String.startswith
+- [ ] String.endswith
+- [ ] String.trim
+- [ ] String.repeat
+- [ ] String.charAt
+- [ ] Promise
+- [ ] Promise.all
+- [ ] call
+- [ ] apply
+- [ ] bind
+- [ ] debounce // lodash
+- [ ] throttle //lodash
+- [ ] memoize //lodash
+- [ ] Lodash.isEqual // deep copy
+- [ ] once // lodash
